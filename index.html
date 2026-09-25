@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ana Paula ❤️</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: Georgia, "Times New Roman", serif;
+        background: radial-gradient(circle at center, #fff5f8 0%, #ffdce7 45%, #f7b6ca 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #7b1738;
+        position: relative;
+    }
+
+    .card {
+        width: min(90vw, 620px);
+        min-height: 360px;
+        padding: 55px 30px;
+        background: rgba(255,255,255,.78);
+        border: 2px solid rgba(255,255,255,.9);
+        border-radius: 30px;
+        box-shadow: 0 20px 60px rgba(130, 30, 65, .22);
+        backdrop-filter: blur(8px);
+        text-align: center;
+        z-index: 5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h1 {
+        font-size: clamp(2rem, 7vw, 3.3rem);
+        margin: 0 0 35px;
+        line-height: 1.1;
+    }
+
+    .message {
+        font-size: clamp(1.5rem, 5vw, 2.4rem);
+        font-weight: bold;
+        margin: 15px 0 30px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 22px;
+        justify-content: center;
+        align-items: center;
+        min-height: 70px;
+        width: 100%;
+    }
+
+    button {
+        border: none;
+        border-radius: 999px;
+        padding: 15px 34px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform .18s, box-shadow .18s;
+        box-shadow: 0 8px 20px rgba(123, 23, 56, .2);
+        touch-action: manipulation;
+    }
+
+    button:hover { transform: scale(1.08); }
+
+    .yes {
+        background: #e83f70;
+        color: white;
+    }
+
+    .no {
+        background: #fff;
+        color: #9c3155;
+        position: relative;
+    }
+
+    .flower {
+        position: fixed;
+        font-size: clamp(2.3rem, 7vw, 4.5rem);
+        z-index: 2;
+        user-select: none;
+        pointer-events: none;
+        filter: drop-shadow(0 4px 5px rgba(100,0,30,.12));
+    }
+
+    .flower.tl { top: -8px; left: -5px; transform: rotate(-18deg); }
+    .flower.tr { top: -8px; right: -5px; transform: rotate(18deg); }
+    .flower.bl { bottom: -10px; left: -5px; transform: rotate(18deg); }
+    .flower.br { bottom: -10px; right: -5px; transform: rotate(-18deg); }
+
+    .falling {
+        position: fixed;
+        top: -60px;
+        z-index: 1;
+        pointer-events: none;
+        animation: fall linear forwards;
+        user-select: none;
+    }
+
+    @keyframes fall {
+        0% { transform: translateY(-70px) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(110vh) rotate(360deg); opacity: .15; }
+    }
+
+    .burst {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 10;
+        pointer-events: none;
+        font-size: 30px;
+        animation: burst 1.5s ease-out forwards;
+    }
+
+    @keyframes burst {
+        0% { transform: translate(-50%, -50%) scale(.2) rotate(0); opacity: 1; }
+        100% {
+            transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1.5) rotate(var(--r));
+            opacity: 0;
+        }
+    }
+
+    .love {
+        animation: appear .7s ease-out;
+    }
+
+    @keyframes appear {
+        from { opacity: 0; transform: scale(.5); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .small-heart {
+        color: #e83f70;
+        margin-left: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="flower tl">🌹🌷</div>
+<div class="flower tr">🌷🌹</div>
+<div class="flower bl">🌸🌹</div>
+<div class="flower br">🌹🌸</div>
+
+<div class="card" id="card">
+    <h1>Você é a Ana Paula? <span class="small-heart">♥</span></h1>
+    <div class="buttons">
+        <button class="yes" onclick="isAna(true)">Sim ❤️</button>
+        <button class="no" onclick="isAna(false)">Não</button>
+    </div>
+</div>
+
+<script>
+const emojis = ["❤️", "💕", "💗", "🌸", "🌹", "🌷", "💖"];
+
+function createFalling() {
+    const el = document.createElement("div");
+    el.className = "falling";
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (18 + Math.random() * 22) + "px";
+    el.style.animationDuration = (5 + Math.random() * 7) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 13000);
+}
+
+setInterval(createFalling, 420);
+for (let i = 0; i < 12; i++) setTimeout(createFalling, i * 180);
+
+function isAna(answer) {
+    if (!answer) {
+        document.getElementById("card").innerHTML = `
+            <div class="love">
+                <div class="message">Então saia da página 😤</div>
+                <div style="font-size:3rem">🚪🏃‍♀️💨</div>
+            </div>`;
+        return;
+    }
+
+    document.getElementById("card").innerHTML = `
+        <div class="love">
+            <div class="message">Você ama o Vinicius? ❤️</div>
+            <div class="buttons" id="loveButtons">
+                <button class="yes" onclick="loveYes()">Sim ❤️</button>
+                <button class="no" id="runaway">Não</button>
+            </div>
+        </div>`;
+
+    setupRunaway();
+}
+
+function setupRunaway() {
+    const btn = document.getElementById("runaway");
+    const area = document.getElementById("loveButtons");
+
+    function escapeButton(e) {
+        if (e) e.preventDefault();
+
+        const maxX = Math.max(0, area.clientWidth - btn.offsetWidth);
+        const maxY = 90;
+        btn.style.position = "absolute";
+        btn.style.left = Math.random() * maxX + "px";
+        btn.style.top = Math.random() * maxY + "px";
+        btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+    }
+
+    btn.addEventListener("mouseenter", escapeButton);
+    btn.addEventListener("pointerdown", escapeButton);
+    btn.addEventListener("touchstart", escapeButton, {passive:false});
+}
+
+function loveYes() {
+    document.getElementById("card").innerHTML = `
+        <div class="love">
+            <div style="font-size:5rem">❤️🌹❤️</div>
+            <div class="message">Eu também te amo ❤️</div>
+            <div style="font-size:1.2rem">— Vinicius</div>
+        </div>`;
+
+    for (let i = 0; i < 80; i++) {
+        setTimeout(() => {
+            const el = document.createElement("div");
+            el.className = "burst";
+            el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 100 + Math.random() * Math.max(innerWidth, innerHeight) * .65;
+            el.style.setProperty("--x", Math.cos(angle) * distance + "px");
+            el.style.setProperty("--y", Math.sin(angle) * distance + "px");
+            el.style.setProperty("--r", (Math.random() * 720 - 360) + "deg");
+            el.style.fontSize = (18 + Math.random() * 32) + "px";
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1700);
+        }, i * 18);
+    }
+}
+</script>
+</body>
+</html>
